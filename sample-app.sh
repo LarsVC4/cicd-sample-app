@@ -1,6 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
+if [ "$(docker ps -aq -f name=samplerunning)" ]; then
+    echo "Container samplerunning already exists. Removing container now!"
+    docker stop samplerunning
+    docker rm samplerunning
+fi
+
 mkdir -p tempdir
 mkdir -p tempdir/templates
 mkdir -p tempdir/static
@@ -21,5 +27,5 @@ _EOF_
 
 cd tempdir || exit
 docker build -t sampleapp .
-docker run -t -d -p 5050:5050 --rm --name samplerunning sampleapp
+docker run -t -d -p 5050:5050 --name samplerunning sampleapp
 docker ps -a 
