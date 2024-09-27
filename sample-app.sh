@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [ "$(docker ps -aq -f name=samplerunning)" ]; then
-    echo "Container samplerunning already exists. Removing container now!"
+    echo "Container samplerunning already exists! Removing container now!"
     docker stop samplerunning
     docker rm samplerunning
 fi
